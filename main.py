@@ -212,7 +212,7 @@ def creat_all():
     # graph = Graph('bolt://120.26.15.210:7687', auth=('neo4j', '123456'))
     #
     ClearGraph(graph)
-    create_graph("model/滑翔炸弹.xml", graph)
+    create_graph("model/Vehicle_04.xml", graph)
 
 
 if __name__ == '__main__':
