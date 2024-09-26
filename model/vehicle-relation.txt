@@ -1,0 +1,17 @@
+Sedan implies Base
+Standard implies Base
+Truck implies Base
+Automatic implies Base
+Manual implies Base
+Diesel implies Base
+Gasoline implies Base
+Hybrid implies Base
+Luxury implies Base
+Luxury implies Sedan
+Truck implies not Sedan
+Automatic implies not Manual
+Gasoline implies not Diesel
+Hybrid implies not Diesel
+Hybrid implies not Gasoline
+Luxury implies not Truck
+Luxury implies not Standard
