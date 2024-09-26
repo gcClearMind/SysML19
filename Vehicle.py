@@ -17,7 +17,6 @@ def create_graph(prods, relation, graph):
         properties = line.strip().split(',')
         if not properties or properties == ['']:
             continue
-        print(properties)
         name = 'Vehicle' + str(Id)
         Id += 1
         vehicle = Node("Vehicle")
@@ -25,11 +24,13 @@ def create_graph(prods, relation, graph):
         isNode[name] = vehicle
         # 为每个属性创建节点，并连接到配置节点
         for property in properties:
-            property_node = Node("Property")
-            property_node['name'] = property
-            isNode[property] = property_node
+            if property not in isNode.keys():
+                property_node = Node("Property")
+                property_node['name'] = property
+                isNode[property] = property_node
             # 创建关系
-            relationship = Relationship(vehicle, "HAS_PROPERTY", property_node)
+
+            relationship = Relationship(vehicle, "HAS_PROPERTY", isNode[property])
             RelationList.append(relationship)
 
     with open(relation, 'r') as file:
@@ -53,7 +54,7 @@ def create_graph(prods, relation, graph):
 
 
 def test():
-    for node in NodeList:
+    for node in isNode:
         print(node)
     for relation in RelationList:
         print(relation)
@@ -63,6 +64,7 @@ def test():
 def createNode(graph):
     for key in isNode.keys():
         graph.create(isNode[key])
+        print(isNode[key])
     for relation in RelationList:
         graph.create(relation)
 
@@ -91,7 +93,7 @@ def creat():
     ClearGraph(graph)
     create_graph("model/Vehicle.prods", "model/vehicle-relation.txt", graph)
     createNode(graph)
-    test()
+    # test()
 
 
 if __name__ == '__main__':
