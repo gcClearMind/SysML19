@@ -30,7 +30,7 @@ def create_graph(prods, relation, graph):
                 isNode[property] = property_node
             # 创建关系
 
-            relationship = Relationship(vehicle, "HAS_PROPERTY", isNode[property])
+            relationship = Relationship(vehicle, "HAS", isNode[property])
             RelationList.append(relationship)
 
     with open(relation, 'r') as file:

@@ -65,7 +65,7 @@ def dfs_isNode(node):
             # 录入使用到的sysml类
             if child_id in U2Sdict.keys():
                 for label in U2Sdict[child_id]:
-                    childNode.add_label(label)
+                    childNode.add_label(standardization(label))
             # else:
             #     childNode.add_label(child.getAttribute("xmi:type"))
             childNode["xmi:id"] = child_id
@@ -182,6 +182,18 @@ def init():
     isNode.clear()
 
 
+#标准化(去除除了uml以外的前缀)
+def standardization(label):
+    if label.count("uml:") != 0:
+        return label
+    else:
+        if ':' in label:
+            return label.split(':', 1)[1]
+        else:
+            return label
+
+
+
 def create_graph(FILE_NAME, graph):
     init()
     Collection = read_file(FILE_NAME)
@@ -199,6 +211,7 @@ def create_graph(FILE_NAME, graph):
     dfs_getAttribute(Data)
     get_map_relation(Collection)
     # test()
+    test()
 
     # 输入图谱
     createNode(graph)
@@ -212,7 +225,8 @@ def creat_all():
     # graph = Graph('bolt://120.26.15.210:7687', auth=('neo4j', '123456'))
     #
     ClearGraph(graph)
-    create_graph("model/Vehicle_04.xml", graph)
+    
+    create_graph("model/滑翔炸弹.xml", graph)
 
 
 if __name__ == '__main__':
